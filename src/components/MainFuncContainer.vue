@@ -20,7 +20,7 @@ defineProps({
 
 <template>
 <div class="main-box">
-  <div class="count-box">
+  <div class="content-box">
     <TitleCard :cardTitle="leCardTitle">
       <slot></slot>
     </TitleCard>
@@ -81,7 +81,7 @@ defineProps({
   display: flex;
   gap: 5px;
 
-  .count-box {
+  .content-box {
     flex: 4;
     border-radius: 20px;
     overflow: hidden;
@@ -142,7 +142,7 @@ defineProps({
 
 @media screen and(max-width: 1024px) {
   .main-box {
-    .count-box {
+    .content-box {
       flex: 3;
     }
   }
