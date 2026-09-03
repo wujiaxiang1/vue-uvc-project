@@ -1,0 +1,28 @@
+html {
+  /* html顶层元素 设置border-box */
+  box-sizing: border-box;
+  background-color: #f6f6f6;
+}
+*, *::before, *::after {
+  /* 所有元素及其伪元素 inherit表示继承父元素属性 */
+  box-sizing: inherit;
+}
+
+html,body,div,p,h1,h2,h3,h4,h5,h6,ul,ol,li{
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+img {
+  vertical-align: middle;
+}
+i {
+  font-style: normal;
+}
