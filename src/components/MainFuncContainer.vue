@@ -4,6 +4,7 @@ defineOptions({
 })
 import TitleCard from '@/components/TitleCard.vue'
 import { ArrowRightBold } from '@element-plus/icons-vue'
+
 defineProps({
   leCardTitle: {
     type: String
@@ -19,22 +20,16 @@ defineProps({
 </script>
 
 <template>
-<div class="main-box">
-  <div class="content-box">
-    <TitleCard :cardTitle="leCardTitle">
-      <slot></slot>
-    </TitleCard>
-  </div>
-  <div class="store-box">
-    <TitleCard class="store-card" :cardTitle="riCardTitle">
-      <el-carousel
-        class="store-carousel"
-        direction="vertical"
-        type="card"
-        :autoplay="false"
-      >
-        <el-carousel-item v-for="(item, idx) in dataList" :key="idx">
-          <div class="img-show-box">
+  <div class="main-box">
+    <div class="content-box">
+      <TitleCard :cardTitle="leCardTitle">
+        <slot></slot>
+      </TitleCard>
+    </div>
+    <div class="store-box">
+      <TitleCard class="store-card" :cardTitle="riCardTitle">
+        <el-scrollbar class="store-scrollbar">
+          <div class="img-show-box" v-for="(item, idx) in dataList" :key="idx">
             <img
               class="img"
               :src="item.img_path"
@@ -59,20 +54,16 @@ defineProps({
               </div>
             </el-popover>
           </div>
-        </el-carousel-item>
-      </el-carousel>
-      <div class="more-btn-box">
-        <el-button
-          type="primary"
-          round
-        >
-          查看更多
-          <el-icon class="el-icon--right"><ArrowRightBold /></el-icon>
-        </el-button>
-      </div>
-    </TitleCard>
+        </el-scrollbar>
+        <div class="more-btn-box">
+          <el-button type="primary" round>
+            查看更多
+            <el-icon class="el-icon--right"><ArrowRightBold /></el-icon>
+          </el-button>
+        </div>
+      </TitleCard>
+    </div>
   </div>
-</div>
 </template>
 
 <style scoped lang="less">
@@ -96,36 +87,32 @@ defineProps({
       flex-direction: column;
     }
 
-    :deep(.el-card.store-card .el-carousel.store-carousel) {
+    :deep(.el-scrollbar.store-scrollbar) {
       flex: 5;
-    }
 
-    :deep(.el-card.store-card .el-carousel.store-carousel .el-carousel__container) {
-      height: 100%;
-    }
+      .el-scrollbar__view {
+        .img-show-box {
+          display: flex;
+          flex-direction: column;
+          border-radius: 20px;
+          gap: 10px;
+          align-items: center;
+          background-color: rgba(238, 238, 238, .9);
+          margin-bottom: 15px;
 
-    :deep(.el-card.store-card .el-carousel.store-carousel .el-carousel__item) {
-      background-color: rgba(238, 238, 238, .9);
-      overflow: visible;
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-    
-      .img-show-box {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        justify-content: center;
-        align-items: center;
-        
-        .img {
-          display: block;
-          width: 100%;
+          &:last-child {
+            margin-bottom: 0px;
+          }
+
+          .img {
+            display: block;
+            width: 100%;
+            border-radius: 50%;
+          }
         }
-      
-        .show-img-info {
-          width: 50%;
-        }
+      }
+      .el-scrollbar__bar.is-vertical {
+        display: none;
       }
     }
 

@@ -5,7 +5,7 @@ defineOptions({
 import MainFuncContainer from '@/components/MainFuncContainer.vue'
 import { ref } from 'vue'
 
-// 计数仓库数据
+// 计数仓库数据（最近孔位）
 const countStoreDataList = ref([])
 const getCountStoreData = () => {
   console.log('获取计数仓库数据 api')
