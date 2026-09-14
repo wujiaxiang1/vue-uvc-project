@@ -1,0 +1,9 @@
+Table "uvc实验记录表" [headercolor: #175e7a] {
+	created_date datetime [ not null ]
+	updated_date datetime [ not null ]
+	record_id integer [ pk, increment, not null, unique ]
+	batch_id char(20) [ not null ]
+	serial_no char(20) [ not null ]
+	operator_id char(20) [ not null ]
+	operator_name char(20) [ not null ]
+}
