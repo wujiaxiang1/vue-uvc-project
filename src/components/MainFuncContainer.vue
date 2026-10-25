@@ -30,23 +30,13 @@ defineProps({
       <TitleCard class="store-card" :cardTitle="riCardTitle">
         <el-scrollbar class="store-scrollbar">
           <div class="img-show-box" v-for="(item, idx) in dataList" :key="idx">
-            <img
-              class="img"
-              :src="item.img_path"
-              :alt="`${item.serial_num}+${item.hole_site}`"
-            />
-            <el-popover placement="left" effect="dark" trigger="click">
+            <el-popover placement="left" effect="dark">
               <template #reference>
-                <el-button
-                  type="primary"
-                  class="show-img-info"
-                  round
-                  text
-                  bg
-                  size="small"
-                >
-                  查看详细
-                </el-button>
+                <img
+                  class="img"
+                  :src="item.img_path"
+                  :alt="`${item.serial_num}+${item.hole_site}`"
+                />
               </template>
               <div class="popover-content">
                 {{ item }}

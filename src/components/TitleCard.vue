@@ -14,7 +14,7 @@ defineProps({
 <template>
   <el-card class="title-card">
     <template #header>
-      <span >{{ cardTitle }}</span>
+      <span>{{ cardTitle }}</span>
     </template>
     <slot></slot>
   </el-card>
@@ -31,7 +31,6 @@ defineProps({
   }
   :deep(.el-card__body) {
     padding-top: 0;
-
   }
 }
 </style>

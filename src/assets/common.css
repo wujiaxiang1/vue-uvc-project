@@ -26,3 +26,9 @@ img {
 i {
   font-style: normal;
 }
+
+html,  /* h继承自视口 */
+body,  /* h继承自html */
+#app { /* h继承自body */
+  height: 100%;
+}

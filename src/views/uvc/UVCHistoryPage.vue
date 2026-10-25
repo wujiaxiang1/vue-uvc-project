@@ -2,6 +2,7 @@
 defineOptions({
   name: 'UVCHistoryPage'
 })
+
 </script>
 
 <template>

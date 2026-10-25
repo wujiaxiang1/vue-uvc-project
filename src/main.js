@@ -3,9 +3,10 @@ import App from './App.vue'
 import pinia from '@/stores'
 import router from '@/router'
 
-import '@/assets/common.css'
 // 安装：pnpm add normalize.css
+// 全局引入 注意顺序
 import 'normalize.css'
+import '@/assets/common.css'
 
 const app = createApp(App)
 

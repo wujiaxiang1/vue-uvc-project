@@ -6,6 +6,8 @@ import UVCPage from '@/views/uvc/UVCPage.vue'
 import UVCHistoryPage from '@/views/uvc/UVCHistoryPage.vue'
 import CountPage from '@/views/count/CountPage.vue'
 import CountHistoryPage from '@/views/count/CountHistoryPage.vue'
+import QAPage from '@/views/assistant/QAPage.vue'
+import KnowledgeBasesPage from '@/views/assistant/KnowledgeBasesPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,9 +23,11 @@ const router = createRouter({
         { path: 'uvc/history', component: UVCHistoryPage },
         { path: 'count', component: CountPage },
         { path: 'count/history', component: CountHistoryPage },
+        { path: 'assistant', component: QAPage },
+        { path: 'assistant/knowledge', component: KnowledgeBasesPage }
       ]
     }
-  ],
+  ]
 })
 
 export default router

@@ -12,7 +12,36 @@ import {
   RemoveFilled,
   WarningFilled
 } from '@element-plus/icons-vue'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useUVCStore } from '@/stores/uvc.js'
+
+const uvcStore = useUVCStore()
+
+onMounted(async () => {
+  // 刚进入程序 更新数据（后续用于历史记录）
+  await uvcStore.getUVCRecord()
+})
+
+// 最近批次信息
+const batchList = ref([])
+// 监听批次信息变化
+watch(
+  () => uvcStore.recordDataList,
+  (newVal) => {
+  const valList = newVal.map((ele) => {
+    const {create_time, batch_id, serial_no, operator_name} = ele
+    return {
+      date: create_time.split("T")[0],
+      batch_id,
+      serial_no,
+      operator_name,
+      status: '已完成'
+    }
+  })
+  batchList.value = valList
+  console.log(batchList.value)
+})
+
 
 const icon = ref('free')
 // 图标状态映射
@@ -34,39 +63,11 @@ const iconStatusMap = {
     color: '#f89c01',
     icon: WarningFilled,
     bgc: '#f7d494'
-
   }
 }
 // 获取当前图标状态  访问对象属性：obj[变量]
 const getIconStatus = computed(() => iconStatusMap[icon.value])
 
-// 最近批次信息
-const batchList = ref([])
-const loading = ref(true)
-// 获取批次信息
-const getBatchInfo = () => {
-  console.log('api 获取最近批次信息')
-  batchList.value = [
-    {
-      batch_num: '1234567',
-      date: '2026.08.02',
-      serial_num: '001',
-      user_name: '张三',
-      status: '已完成'
-    },
-    {
-      batch_num: '1234567',
-      date: '2026.08.02',
-      serial_num: '002',
-      user_name: '李四',
-      status: '运行中'
-    }
-  ]
-}
-setInterval(() => { 
-  getBatchInfo()
-  loading.value = false
-}, 5000)
 // 查看批次信息
 const showBatchInfo = (scope) => {
   console.log(scope)
@@ -157,11 +158,11 @@ getMsgList()
           <el-button link>more></el-button>
         </template>
         <div class="table-box">
-          <el-table :data="batchList" v-loading="loading">
-            <el-table-column prop="batch_num" label="批次号"></el-table-column>
+          <el-table :data="batchList" v-loading="uvcStore.loading">
             <el-table-column prop="date" label="日期"></el-table-column>
-            <el-table-column prop="serial_num" label="序列号"></el-table-column>
-            <el-table-column prop="user_name" label="操作人"></el-table-column>
+            <el-table-column prop="batch_id" label="批次号"></el-table-column>
+            <el-table-column prop="serial_no" label="序列号"></el-table-column>
+            <el-table-column prop="operator_name" label="操作人"></el-table-column>
             <el-table-column label="状态">
               <template #default="{ row }">
                 <el-text :type="row.status=='运行中'?'primary':undefined">
@@ -229,7 +230,7 @@ getMsgList()
   display: grid;
   grid-template-rows: repeat(18, 1fr);
   grid-template-columns: repeat(7, 1fr);
-  gap: 1vh;
+  gap: 10px;
 
   .state-box {
     grid-row: 1 / span 5;

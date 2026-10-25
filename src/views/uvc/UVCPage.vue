@@ -14,9 +14,19 @@ const UVCStoreDataList = ref([])
     riCardTitle="最近批次"
     :dataList="UVCStoreDataList"
   >
-  <div class="uvc-main-body">
-    UVCPage
-  </div>
+    <div class="uvc-main-body">
+      <div>
+        参数选择
+      </div>
+      <div>
+        <div>
+          孔位示意图
+        </div>
+        <div>
+          批次信息
+        </div>
+      </div>
+    </div>
   </MainFuncContainer>
 </template>
 
